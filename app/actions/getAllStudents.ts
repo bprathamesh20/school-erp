@@ -1,12 +1,15 @@
+"use server"
+
 import { prisma } from "@/lib/db"
+import { Student } from "@prisma/client"
 
-
-export const getAllStudents = async () => {
+// Ensure to use the correct model name
+export const getAllStudents = async (): Promise<Student[]> => {
     try {
-    const response = await prisma.student.findMany()
-    return response
+        const students = await prisma.student.findMany() // Adjust the model name as needed
+        return students
     } catch (error) {
-        console.log(error)
-        return error
+        console.error(error)
+        return []
     }
 }
