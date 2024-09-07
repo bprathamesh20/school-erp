@@ -33,11 +33,11 @@ type StudentFormData = {
   dateOfAdmission: string
   standard: number
   progress: string
-  conduct: string
-  dateOfLeaving: string
-  standardStudying: number
-  reasonForLeaving: string
-  remarks: string
+  conduct?: string
+  dateOfLeaving?: string
+  standardStudying?: number
+  reasonForLeaving?: string
+  remarks?: string
   board: string
   medium: string
 }
@@ -176,32 +176,32 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="progress">Progress</Label>
-            <Input id="progress" {...register('progress', { required: true })} />
+            <Input id="progress" {...register('progress', )} />
             {errors.progress && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
             <Label htmlFor="conduct">Conduct</Label>
-            <Input id="conduct" {...register('conduct', { required: true })} />
+            <Input id="conduct" {...register('conduct',)} />
             {errors.conduct && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
             <Label htmlFor="dateOfLeaving">Date of Leaving</Label>
-            <Input id="dateOfLeaving" type="date" {...register('dateOfLeaving', { required: true })} />
+            <Input id="dateOfLeaving" type="date" {...register('dateOfLeaving', )} />
             {errors.dateOfLeaving && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
             <Label htmlFor="standardStudying">Standard Studying</Label>
-            <Input id="standardStudying" type="number" {...register('standardStudying', { required: true })} />
+            <Input id="standardStudying" type="number" {...register('standardStudying',)} />
             {errors.standardStudying && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
             <Label htmlFor="reasonForLeaving">Reason for Leaving</Label>
-            <Input id="reasonForLeaving" {...register('reasonForLeaving', { required: true })} />
+            <Input id="reasonForLeaving" {...register('reasonForLeaving')} />
             {errors.reasonForLeaving && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
             <Label htmlFor="remarks">Remarks</Label>
-            <Input id="remarks" {...register('remarks', { required: true })} />
+            <Input id="remarks" {...register('remarks')} />
             {errors.remarks && <span className="text-red-500">This field is required</span>}
           </div>
           <div>

@@ -6,7 +6,6 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 import { Skeleton } from "@/components/ui/skeleton"
 import { getStudentbyId } from '@/app/actions/getStudentbyId'
 import { Student } from '@prisma/client'
-import App from 'next/app'
 import AppBar from '@/components/app-bar'
 
 type Props = {

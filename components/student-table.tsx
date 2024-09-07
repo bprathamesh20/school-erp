@@ -90,12 +90,13 @@ export function StudentTable() {
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Student Table</h1>
+            <a href="/students/new" className="ml-auto my-3"><Button>Create New Student</Button></a>
             <Input
                 type="text"
                 placeholder="Search by student or father's name"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="mb-4"
+                className="mb-4 mt-2"
             />
             <Table>
                 <TableHeader>
@@ -118,6 +119,12 @@ export function StudentTable() {
                         <TableHead onClick={() => requestSort('medium')} className="cursor-pointer">
                             Profile {getSortIcon('medium')}
                         </TableHead>
+                        <TableHead >
+                            TC 
+                        </TableHead>
+                        <TableHead >
+                            Bonafide
+                        </TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -130,6 +137,16 @@ export function StudentTable() {
                             <TableCell>{student.standard}</TableCell>
                             <TableCell>
                               <a href={`/students/view/${student.id}`}>
+                              <Button>View</Button>
+                              </a>
+                              </TableCell>
+                              <TableCell>
+                              <a href={`/students/tc/${student.id}`}>
+                              <Button>View</Button>
+                              </a>
+                              </TableCell>
+                              <TableCell>
+                              <a href={`/students/bonafide/${student.id}`}>
                               <Button>View</Button>
                               </a>
                               </TableCell>
