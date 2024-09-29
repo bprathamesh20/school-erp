@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { ChevronDown, ChevronUp, ChevronsUpDown } from 'lucide-react'
 import { getAllStudents } from '@/app/actions/getAllStudents'
 
-import { useRouter } from 'next/navigation'
 type Student = {
     id: string
     registerNo: number
@@ -29,8 +28,6 @@ export function StudentTable() {
     const [currentPage, setCurrentPage] = useState(1)
     const [searchTerm, setSearchTerm] = useState('')
     const studentsPerPage = 10
-
-    const router = useRouter()
     useEffect(() => {
         const fetchStudents = async () => {
             try {

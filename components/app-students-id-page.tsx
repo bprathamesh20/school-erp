@@ -56,11 +56,11 @@ export async function AppStudentsIdPage({ params }: { params: { id: string } }) 
                 <TableCell>{student.surname}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">Father's Name</TableCell>
+                <TableCell className="font-medium">Father&apos;s Name</TableCell>
                 <TableCell>{student.fathersName}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">Mother's Name</TableCell>
+                <TableCell className="font-medium">Mother&apos;s Name</TableCell>
                 <TableCell>{student.mothersName}</TableCell>
               </TableRow>
               <TableRow>

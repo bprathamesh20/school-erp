@@ -1,21 +1,14 @@
 'use client'
 
-import { schoolInfo } from "@/lib/school-info";
 import { Student } from "@prisma/client";
 import { Button } from "./ui/button";
 import { useRef } from 'react';
 import generatePDF, {Resolution, Margin} from 'react-to-pdf';
+import { SchoolInfoType } from "@/lib/school-info";
 
 
-const SchoolLeavingCertificate = ({ student, schoolInfo }: { student: Student, schoolInfo: any }) => {
+const SchoolLeavingCertificate = ({ student, schoolInfo }: { student: Student, schoolInfo: SchoolInfoType }) => {
     const targetRef = useRef<HTMLDivElement>(null);
-    const options = {
-        resolution: Resolution.HIGH,
-        page:{
-            margin: Margin.SMALL,
-            size: 'A4',
-        }
-    }
     
     return (
         <div className="flex flex-col items-center justify-center">

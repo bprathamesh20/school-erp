@@ -25,6 +25,7 @@ model Student {
   id              String   @id @default(uuid())
   registerNo      Int
   udiseNo         String
+  penNo           String?
   studentId       String
   adharNumber     String
   studentFullName String

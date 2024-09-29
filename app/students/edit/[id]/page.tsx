@@ -1,13 +1,11 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import axios from 'axios'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
 
 type StudentFormData = {
   registerNo: number
@@ -42,28 +40,53 @@ type StudentFormData = {
   board: string
   medium: string
 }
+type Props = {
+    params: {
+      id: string
+    }
+  }
 
-export function CreateStudent() {
-  const { register, handleSubmit, formState: { errors } } = useForm<StudentFormData>()
+export default function EditStudentPage({ params }: Props) {
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<StudentFormData>()
+
+  const [loading, setLoading] = useState(true)
+  const id = params.id
+  // Fetch student details when the component mounts
+  useEffect(() => {
+    if (params.id) {
+      axios.get(`/api/students/${id}`)
+        .then(response => {
+            console.log(response.data)
+          reset(response.data) // Prepopulate form with student data
+          setLoading(false)
+        })
+        .catch(error => {
+          console.error('Error fetching student details:', error)
+          setLoading(false)
+        })
+    }
+  }, [id, reset])
 
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
     try {
-      const response = await axios.post('/api/students/add', data, {
+      const response = await axios.put(`/api/students/${id}`, data, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Change this to the desired content type
-      }
+          'Content-Type': 'application/json', // Adjust content type as needed
+        }
       })
-     
-      console.log(response.data)
+      console.log('Student updated:', response.data)
     } catch (error) {
-     
-      console.error('Error adding student:', error)
+      console.error('Error updating student:', error)
     }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>
   }
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Create New Student</h1>
+      <h1 className="text-2xl font-bold mb-4">Edit Student</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -78,7 +101,7 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="penNo">PEN No</Label>
-            <Input id="udiseNo" {...register('udiseNo', { required: true })} />
+            <Input id="penNo" {...register('penNo', { required: true })} />
             {errors.penNo && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
@@ -182,33 +205,8 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="progress">Progress</Label>
-            <Input id="progress" {...register('progress', )} />
+            <Input id="progress" {...register('progress', { required: true })} />
             {errors.progress && <span className="text-red-500">This field is required</span>}
-          </div>
-          <div>
-            <Label htmlFor="conduct">Conduct</Label>
-            <Input id="conduct" {...register('conduct',)} />
-            {errors.conduct && <span className="text-red-500">This field is required</span>}
-          </div>
-          <div>
-            <Label htmlFor="dateOfLeaving">Date of Leaving</Label>
-            <Input id="dateOfLeaving" type="date" {...register('dateOfLeaving', )} />
-            {errors.dateOfLeaving && <span className="text-red-500">This field is required</span>}
-          </div>
-          <div>
-            <Label htmlFor="standardStudying">Standard Studying</Label>
-            <Input id="standardStudying" type="number" {...register('standardStudying',)} />
-            {errors.standardStudying && <span className="text-red-500">This field is required</span>}
-          </div>
-          <div>
-            <Label htmlFor="reasonForLeaving">Reason for Leaving</Label>
-            <Input id="reasonForLeaving" {...register('reasonForLeaving')} />
-            {errors.reasonForLeaving && <span className="text-red-500">This field is required</span>}
-          </div>
-          <div>
-            <Label htmlFor="remarks">Remarks</Label>
-            <Input id="remarks" {...register('remarks')} />
-            {errors.remarks && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
             <Label htmlFor="board">Board</Label>
@@ -217,20 +215,11 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="medium">Medium</Label>
-            <Select onValueChange={(value) => register('medium', { value })}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select medium" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="english">English</SelectItem>
-                <SelectItem value="hindi">Hindi</SelectItem>
-                <SelectItem value="marathi">Marathi</SelectItem>
-              </SelectContent>
-            </Select>
+            <Input id="medium" {...register('medium', { required: true })} />
             {errors.medium && <span className="text-red-500">This field is required</span>}
           </div>
         </div>
-        <Button type="submit" className="w-full">Create Student</Button>
+        <Button type="submit" className="mt-4">Update Student</Button>
       </form>
     </div>
   )

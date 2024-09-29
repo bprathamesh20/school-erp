@@ -1,12 +1,19 @@
+'use client'
+
 import AppBar from "@/components/app-bar";
 import { StudentTable } from "@/components/student-table"
-import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
+
+
 
 export default function StudentList() {
+    const session = useSession();
   return (
     <div>
+        
       <AppBar/>
-      <StudentTable />
+      {session.data?.user && <StudentTable />}
+
     </div>
   );
 }

@@ -1,13 +1,17 @@
 import { prisma } from "@/lib/db"
 import { parse } from 'date-format-parse';
-export async function POST(req: Request) {
+
+export async function PUT(req: Request) {
     const data = await req.formData();
     console.log(data);
     console.log(parse(data.get('dateOfBirth') as string, 'YYYY-MM-DDTHH:MM:SSZ'))
 
 
     try {
-        const student = await prisma.student.create({
+        const student = await prisma.student.update({
+            where: {
+                id: data.get('id') as string
+            },
             data: {
                 registerNo: Number(data.get('registerNo')),
                 udiseNo: data.get('udiseNo') as string,
