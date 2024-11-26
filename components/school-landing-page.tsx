@@ -11,6 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import Gallery from "@/components/gallery"
 
 // Import images
 import heroImage1 from "@/public/images/hero-image-1.jpeg"
@@ -28,6 +29,8 @@ export default function SchoolLandingPageComponent() {
     heroImage2,
     heroImage3,
   ]
+   
+        
 
   const activities = [
     { name: "Sports Day", image: sportsDay },
@@ -38,7 +41,7 @@ export default function SchoolLandingPageComponent() {
 
   return (
     <div className="flex flex-col ">
-
+      
       <main className="flex-grow">
         <section className="bg-muted py-12">
           <div className="container mx-auto px-4">
@@ -62,27 +65,7 @@ export default function SchoolLandingPageComponent() {
           </div>
         </section>
 
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center">School Activities</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {activities.map((activity, index) => (
-                <Card key={index}>
-                  <CardContent className="p-4">
-                    <Image
-                      src={activity.image}
-                      alt={activity.name}
-                      width={300}
-                      height={200}
-                      className="w-full rounded-lg mb-2 object-contain"
-                    />
-                    <h3 className="text-xl font-semibold">{activity.name}</h3>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Gallery />
 
         <section className="bg-muted py-12">
           <div className="container mx-auto px-4">
