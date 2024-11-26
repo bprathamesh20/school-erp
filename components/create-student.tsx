@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useRouter } from 'next/navigation'
 
 
 type StudentFormData = {
@@ -44,6 +45,7 @@ type StudentFormData = {
 }
 
 export function CreateStudent() {
+  const router = useRouter()
   const { register, handleSubmit, formState: { errors } } = useForm<StudentFormData>()
 
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
@@ -53,7 +55,8 @@ export function CreateStudent() {
           'Content-Type': 'multipart/form-data', // Change this to the desired content type
       }
       })
-     
+
+      router.push('/students/list')
       console.log(response.data)
     } catch (error) {
      

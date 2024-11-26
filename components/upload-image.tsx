@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function UploadImage() {
     const [file, setFile] = useState<File | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
     const [description, setDescription] = useState('');
     const supabase = createClient();
+
+    const router = useRouter()
 
     useEffect(() => {
         // Create a preview for the selected image
@@ -74,7 +77,7 @@ export default function UploadImage() {
 
             console.log('File uploaded successfully:', uploadData);
             console.log('Image details saved successfully:', insertData);
-
+            router.push('/list-images')
             // Reset form
             clearFile();
             setDescription('');
