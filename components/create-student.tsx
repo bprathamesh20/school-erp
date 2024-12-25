@@ -46,7 +46,17 @@ type StudentFormData = {
 
 export function CreateStudent() {
   const router = useRouter()
-  const { register, handleSubmit, formState: { errors } } = useForm<StudentFormData>()
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<StudentFormData>({
+    defaultValues: {
+      udiseNo: '27120512007',
+      nationality: 'Indian',
+      state: 'Maharastra',
+      motherTongue: 'Marathi',
+      nation: 'India',
+      conduct: 'Good'
+
+    }
+  })
 
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
     try {
@@ -80,8 +90,8 @@ export function CreateStudent() {
             {errors.udiseNo && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
-            <Label htmlFor="penNo">PEN No</Label>
-            <Input id="udiseNo" {...register('udiseNo', { required: true })} />
+            <Label htmlFor="penNo">APPAR ID</Label>
+            <Input id="udiseNo" {...register('penNo', { required: true })} />
             {errors.penNo && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
@@ -126,7 +136,20 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="religion">Religion</Label>
-            <Input id="religion" {...register('religion', { required: true })} />
+            <Select {...register('religion', { required: true })}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select religion" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="hindu">Hindu</SelectItem>
+                <SelectItem value="muslim">Muslim</SelectItem>
+                <SelectItem value="christian">Christian</SelectItem>
+                <SelectItem value="sikh">Sikh</SelectItem>
+                <SelectItem value="buddhist">Buddhist</SelectItem>
+                <SelectItem value="jain">Jain</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
             {errors.religion && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
@@ -150,7 +173,45 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="district">District</Label>
-            <Input id="district" {...register('district', { required: true })} />
+            <Select {...register('district', { required: true })}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select district" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ahmednagar">Ahmednagar</SelectItem>
+                <SelectItem value="akola">Akola</SelectItem>
+                <SelectItem value="aurangabad">Aurangabad</SelectItem>
+                <SelectItem value="beed">Beed</SelectItem>
+                <SelectItem value="bhandara">Bhandara</SelectItem>
+                <SelectItem value="bhivandi">Bhivandi</SelectItem>
+                <SelectItem value="buldhana">Buldhana</SelectItem>
+                <SelectItem value="chandrapur">Chandrapur</SelectItem>
+                <SelectItem value="dhule">Dhule</SelectItem>
+                <SelectItem value="dharashiv">Dharashiv</SelectItem>
+                <SelectItem value="gadchiroli">Gadchiroli</SelectItem>
+                <SelectItem value="jalna">Jalna</SelectItem>
+                <SelectItem value="jalgaon">Jalgaon</SelectItem>
+                <SelectItem value="kolhapur">Kolhapur</SelectItem>
+                <SelectItem value="latur">Latur</SelectItem>
+                <SelectItem value="mumbai">Mumbai</SelectItem>
+                <SelectItem value="nagpur">Nagpur</SelectItem>
+                <SelectItem value="nanded">Nanded</SelectItem>
+                <SelectItem value="nasik">Nasik</SelectItem>
+                <SelectItem value="navi mumbai">Navi Mumbai</SelectItem>
+                <SelectItem value="palghar">Palghar</SelectItem>
+                <SelectItem value="parbhani">Parbhani</SelectItem>
+                <SelectItem value="pune">Pune</SelectItem>
+                <SelectItem value="raigad">Raigad</SelectItem>
+                <SelectItem value="ratnagiri">Ratnagiri</SelectItem>
+                <SelectItem value="sangli">Sangli</SelectItem>
+                <SelectItem value="satara">Satara</SelectItem>
+                <SelectItem value="solapur">Solapur</SelectItem>
+                <SelectItem value="thane">Thane</SelectItem>
+                <SelectItem value="wardha">Wardha</SelectItem>
+                <SelectItem value="washim">Washim</SelectItem>
+                <SelectItem value="yavatmal">Yavatmal</SelectItem>
+              </SelectContent>
+            </Select>
             {errors.district && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
@@ -184,9 +245,17 @@ export function CreateStudent() {
             {errors.standard && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
-            <Label htmlFor="progress">Progress</Label>
-            <Input id="progress" {...register('progress', )} />
-            {errors.progress && <span className="text-red-500">This field is required</span>}
+            <Label htmlFor="progress">progress</Label>
+            <Select {...register('progress', { required: true })}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select progress" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="satisfactory">Satisfactory</SelectItem>
+                <SelectItem value="unsatisfactory">Unsatisfactory</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.religion && <span className="text-red-500">This field is required</span>}
           </div>
           <div>
             <Label htmlFor="conduct">Conduct</Label>
