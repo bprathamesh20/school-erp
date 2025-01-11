@@ -53,8 +53,11 @@ export function CreateStudent() {
       state: 'Maharastra',
       motherTongue: 'Marathi',
       nation: 'India',
-      conduct: 'Good'
-
+      conduct: 'Good',
+      progress: 'satisfactory',
+      medium: 'english',
+      religion: 'hindu',
+      district: 'pune'
     }
   })
 
@@ -136,7 +139,7 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="religion">Religion</Label>
-            <Select {...register('religion', { required: true })}>
+            <Select onValueChange={(value) => setValue('religion', value, { shouldValidate: true })} required>
               <SelectTrigger>
                 <SelectValue placeholder="Select religion" />
               </SelectTrigger>
@@ -173,7 +176,7 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="district">District</Label>
-            <Select {...register('district', { required: true })}>
+            <Select onValueChange={(value) => setValue('district', value, { shouldValidate: true })} required>
               <SelectTrigger>
                 <SelectValue placeholder="Select district" />
               </SelectTrigger>
@@ -246,7 +249,7 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="progress">progress</Label>
-            <Select {...register('progress', { required: true })}>
+            <Select onValueChange={(value) => setValue('progress', value, { shouldValidate: true })} required>
               <SelectTrigger>
                 <SelectValue placeholder="Select progress" />
               </SelectTrigger>
@@ -289,7 +292,7 @@ export function CreateStudent() {
           </div>
           <div>
             <Label htmlFor="medium">Medium</Label>
-            <Select onValueChange={(value) => register('medium', { value })}>
+            <Select onValueChange={(value) => setValue('medium', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select medium" />
               </SelectTrigger>
